@@ -3,6 +3,9 @@ set -x
 #save all env vars .bashrc for ssh sessions
 printenv | cat >> /root/.bashrc
 
+# hadoop bootstrap
+/etc/hadoop-bootstrap.sh -d
+
 #restart postgresql
 sudo /etc/init.d/postgresql restart
 

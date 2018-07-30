@@ -1,29 +1,28 @@
-FROM postgres
+FROM susanxhuynh/cdh5-hadoop
 
-#expected build args
-ARG JAVA_HOME
-ARG HIVE_HOME
-ARG HIVE_CONF
-ARG HIVE_VERSION
-ARG HADOOP_VERSION
-ARG CDH_VERSION
-ARG CDH_EXACT_VERSION
-ARG POSTGRES_VERSION
-ARG POSTGRESQL_MAIN
-ARG POSTGRESQL_CONFIG_FILE
-ARG POSTGRESQL_BIN
-ARG PGPASSWORD
-ARG HADOOP_HOME
-ARG HADOOP_PREFIX
-ARG HADOOP_COMMON_HOME
-ARG HADOOP_HDFS_HOME
-ARG HADOOP_MAPRED_HOME
-ARG HADOOP_YARN_HOME
-ARG HADOOP_CONF_DIR
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+ENV HIVE_HOME /usr/local/hive
+ENV HIVE_CONF /usr/local/hive/conf
+ENV HIVE_VERSION 1.1.0
+ENV HADOOP_VERSION 2.6.0
+ENV CDH_VERSION 5
+ENV CDH_EXACT_VERSION 5.11.0
+ENV POSTGRES_VERSION 9.5
+ENV POSTGRESQL_MAIN /var/lib/postgresql/9.5/main/
+ENV POSTGRESQL_CONFIG_FILE /var/lib/postgresql/9.5/main/postgresql.conf
+ENV POSTGRESQL_BIN /usr/lib/postgresql/9.5/bin/postgres
+ENV PGPASSWORD hive
+ENV HADOOP_HOME /usr/local/hadoop
+ENV HADOOP_PREFIX /usr/local/hadoop
+ENV HADOOP_COMMON_HOME /usr/local/hadoop
+ENV HADOOP_HDFS_HOME /usr/local/hadoop
+ENV HADOOP_MAPRED_HOME /usr/local/hadoop
+ENV HADOOP_YARN_HOME /usr/local/hadoop
+ENV HADOOP_CONF_DIR /usr/local/hadoop/etc/hadoop
 
 ENV PATH $PATH:$JAVA_HOME/bin:$HIVE_HOME/bin:$HADOOP_HOME:$HADOOP_HOME/bin
 
-# clone and compile hive
+# add hive
 ADD ./deps/hive-1.1.0-cdh${CDH_EXACT_VERSION}.tar.gz /usr/local/
 RUN mv /usr/local/hive-${HIVE_VERSION}-cdh${CDH_EXACT_VERSION} /usr/local/hive
 
@@ -76,4 +75,4 @@ RUN chmod 700 /etc/hive-bootstrap.sh
 EXPOSE 10000 10001 10002 10003 9083 50111 5432
 
 # run bootstrap script
-ENTRYPOINT ["/etc/hive-bootstrap.sh", "-d"]
+ENTRYPOINT ["/etc/hive-bootstrap.sh", "-bash"]

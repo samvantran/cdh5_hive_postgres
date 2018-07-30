@@ -56,7 +56,7 @@ RUN chmod 700 /etc/hadoop-bootstrap.sh
 RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
 
 # run bootstrap script
-ENTRYPOINT ["/etc/hadoop-bootstrap.sh", "-bash"]
+# RUN ["/etc/hadoop-bootstrap.sh", "-d"]
 
 #for exposed ports refer
 #https://www.cloudera.com/documentation/enterprise/5-4-x/topics/cdh_ig_ports_cdh5.html
