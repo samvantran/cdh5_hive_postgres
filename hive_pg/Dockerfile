@@ -62,9 +62,9 @@ RUN sed -i -e 's/peer/md5/g' /etc/postgresql/$POSTGRES_VERSION/main/pg_hba.conf
 # copy config, sql, data files to /opt/files
 RUN mkdir /opt/files
 RUN echo $HIVE_CONF
-ADD conf/hive-site.xml /opt/files/
+ADD templates/hive-site.xml.template /opt/files/
 ADD conf/hive-log4j.properties /opt/files/
-ADD conf/hive-site.xml $HIVE_CONF/hive-site.xml
+ADD templates/hive-site.xml.template $HIVE_CONF/hive-site.xml.template
 ADD conf/hive-log4j.properties $HIVE_CONF/hive-log4j.properties
 
 # set permissions for hive bootstrap file
@@ -75,4 +75,4 @@ RUN chmod 700 /etc/hive-bootstrap.sh
 EXPOSE 10000 10001 10002 10003 9083 50111 5432
 
 # run bootstrap script
-ENTRYPOINT ["/etc/hive-bootstrap.sh", "-bash"]
+#ENTRYPOINT ["/etc/hive-bootstrap.sh", "-bash"]

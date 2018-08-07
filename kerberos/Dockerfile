@@ -1,0 +1,16 @@
+FROM susanxhuynh/cdh5-hive
+
+# copy kerberized hadoop config files
+ADD templates/core-site.xml.template $HADOOP_PREFIX/etc/hadoop/core-site.xml.template
+ADD templates/hdfs-site.xml.template $HADOOP_PREFIX/etc/hadoop/hdfs-site.xml.template
+ADD templates/yarn-site.xml.template $HADOOP_PREFIX/etc/hadoop/yarn-site.xml.template
+
+# copy kerberized hive config file
+RUN echo $HIVE_CONF
+ADD templates/hive-site.xml.template /opt/files/
+ADD templates/hive-site.xml.template $HIVE_CONF/hive-site.xml.template
+
+ADD conf/krb5.conf /etc/
+
+# run bootstrap script
+ENTRYPOINT ["/etc/hive-bootstrap.sh", "-bash"]
