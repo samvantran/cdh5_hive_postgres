@@ -12,5 +12,7 @@ ADD templates/hive-site.xml.template $HIVE_CONF/hive-site.xml.template
 
 ADD conf/krb5.conf /etc/
 
+RUN apt-get install -y krb5-user
+
 # run bootstrap script
-ENTRYPOINT ["/etc/hive-bootstrap.sh", "-bash"]
+ENTRYPOINT ["/etc/hive-bootstrap.sh", "-d"]
