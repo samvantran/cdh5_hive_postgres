@@ -1,4 +1,4 @@
-FROM susanxhuynh/cdh5-hive
+FROM cdh5-hive
 
 # copy kerberized hadoop config files
 ADD templates/core-site.xml.template $HADOOP_PREFIX/etc/hadoop/core-site.xml.template

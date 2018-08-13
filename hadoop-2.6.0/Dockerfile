@@ -1,5 +1,5 @@
 # Creates pseudo distributed hadoop 2.6.0 in ubuntu
-FROM susanxhuynh/cdh5-ubuntu
+FROM cdh5-ubuntu
 
 USER root
 

@@ -1,4 +1,4 @@
-FROM susanxhuynh/cdh5-hadoop
+FROM cdh5-hadoop
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV HIVE_HOME /usr/local/hive
