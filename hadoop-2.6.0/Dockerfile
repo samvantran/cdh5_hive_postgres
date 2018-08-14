@@ -4,16 +4,9 @@ FROM cdh5-ubuntu
 USER root
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-ENV HIVE_HOME /usr/local/hive
-ENV HIVE_CONF /usr/local/hive/conf
-ENV HIVE_VERSION 1.1.0
 ENV HADOOP_VERSION 2.6.0
 ENV CDH_VERSION 5
 ENV CDH_EXACT_VERSION 5.11.0
-ENV POSTGRESQL_MAIN /var/lib/postgresql/9.5/main/
-ENV POSTGRESQL_CONFIG_FILE /var/lib/postgresql/9.5/main/postgresql.conf
-ENV POSTGRESQL_BIN /usr/lib/postgresql/9.5/bin/postgres
-ENV PGPASSWORD hive
 ENV HADOOP_HOME /usr/local/hadoop
 ENV HADOOP_PREFIX /usr/local/hadoop
 ENV HADOOP_COMMON_HOME /usr/local/hadoop
@@ -53,9 +46,6 @@ RUN chown root:root /etc/hadoop-bootstrap.sh
 RUN chmod 700 /etc/hadoop-bootstrap.sh
 
 RUN chmod +x /usr/local/hadoop/etc/hadoop/*-env.sh
-
-# run bootstrap script
-# RUN ["/etc/hadoop-bootstrap.sh", "-d"]
 
 #for exposed ports refer
 #https://www.cloudera.com/documentation/enterprise/5-4-x/topics/cdh_ig_ports_cdh5.html

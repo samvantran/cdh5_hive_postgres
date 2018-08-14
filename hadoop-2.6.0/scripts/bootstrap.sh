@@ -18,12 +18,7 @@ sed s/HOSTNAME/$HOSTNAME/ /usr/local/hadoop/etc/hadoop/hdfs-site.xml.template > 
 
 $HADOOP_PREFIX/sbin/start-dfs.sh
 $HADOOP_PREFIX/sbin/start-yarn.sh
-#$HADOOP_PREFIX/sbin/yarn-daemon.sh start timelineserver
 
 if [[ $1 == "-bash" ]]; then
   /bin/bash
 fi
-
-#if [[ $1 == "-d" ]]; then
-#  while true; do sleep 1000; done
-#fi
