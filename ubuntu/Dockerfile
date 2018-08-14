@@ -25,10 +25,6 @@ RUN yes | ssh-keygen -q -N "" -t rsa -f /etc/ssh/ssh_host_rsa_key
 RUN yes | ssh-keygen -q -N "" -t rsa -f /root/.ssh/id_rsa
 RUN cp /root/.ssh/id_rsa.pub /root/.ssh/authorized_keys
 
-# SSH login fix. Otherwise user is kicked off after login
-# RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-# RUN /usr/sbin/sshd
-
 # fix the 254 error code
 RUN sed  -i "/^[^#]*UsePAM/ s/.*/#&/"  /etc/ssh/sshd_config
 RUN echo "UsePAM no" >> /etc/ssh/sshd_config
@@ -53,7 +49,7 @@ RUN apt-get install -y oracle-java8-installer
 # java env setup
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV PATH $PATH:$JAVA_HOME/bin
-ENV TILAK tilak
+
 # set permissions for bootstrap file
 ADD scripts/bootstrap.sh /etc/ubuntu-bootstrap.sh
 RUN chown root:root /etc/ubuntu-bootstrap.sh
@@ -61,5 +57,4 @@ RUN chmod 700 /etc/ubuntu-bootstrap.sh
 
 EXPOSE 22
 
-#start
 ENTRYPOINT ["/etc/ubuntu-bootstrap.sh", "-bash"]
