@@ -10,8 +10,10 @@ RUN echo $HIVE_CONF
 ADD templates/hive-site.xml.template /opt/files/
 ADD templates/hive-site.xml.template $HIVE_CONF/hive-site.xml.template
 
+# krb5.conf
 ADD conf/krb5.conf /etc/
 
+# install kinit, used in bootstrap script
 RUN apt-get install -y krb5-user
 
 # run bootstrap script

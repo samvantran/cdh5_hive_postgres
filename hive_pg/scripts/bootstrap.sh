@@ -9,8 +9,10 @@ printenv | cat >> /root/.bashrc
 # restart postgresql
 sudo /etc/init.d/postgresql restart
 
-# kinit
-kinit -k -t /usr/local/hadoop/etc/hadoop/hdfs.keytab hdfs@LOCAL
+# kinit for kerberos mode
+if command -v kinit 2>/dev/null; then
+    kinit -k -t /usr/local/hadoop/etc/hadoop/hdfs.keytab hdfs@LOCAL
+fi
 
 until hdfs dfs -ls /
 do

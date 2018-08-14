@@ -148,6 +148,7 @@
     <description></description>
   </property>
 
+  <!-- Authentication -->
   <property>
     <name>hive.server2.authentication</name>
     <value>KERBEROS</value>
